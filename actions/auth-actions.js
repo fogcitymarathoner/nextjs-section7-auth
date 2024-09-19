@@ -2,7 +2,7 @@
 import {redirect} from "next/navigation";
 import {createUser} from "@/lib/user";
 import {hashUserPassword, verifyPassword} from "@/lib/hash";
-import {createAuthSession} from "@/lib/auth";
+import {createAuthSession, destroySession} from "@/lib/auth";
 import {getUserByEmail} from "@/lib/user";
 
 export async function signup(prevState, formData) {
@@ -66,6 +66,7 @@ export async function login(prevState, formData) {
     }
     console.log('existingUser.UserId ' + existingUser.id)
     await createAuthSession(existingUser.id)
+    console.log("redirect('/training')")
     redirect('/training')
 
 }
@@ -75,4 +76,12 @@ export async function auth(mode, prevState, formData) {
         return login(prevState, formData)
     }
     return signup(prevState, formData)
+}
+
+export async function logout(){
+    console.log('(logout) destroySession()')
+    await destroySession()
+
+    console.log("redirect('/')")
+    redirect('/')
 }
