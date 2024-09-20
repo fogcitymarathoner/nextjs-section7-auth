@@ -8,8 +8,7 @@ export const metadata = {
 
 export default function AuthRootLayout({children}) {
     return (
-        <html lang="en">
-            <body>
+        <>
             <header id="auth-header">
                 <p>Welcome Back</p>
                 <form action={logout}>
@@ -17,7 +16,6 @@ export default function AuthRootLayout({children}) {
                 </form>
             </header>
             {children}
-            </body>
-        </html>
+        </>
     );
 }
